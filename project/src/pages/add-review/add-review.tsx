@@ -2,7 +2,7 @@ function AddReview(): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
-         <div className="film-card__bg">
+        <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
 
@@ -92,7 +92,7 @@ function AddReview(): JSX.Element {
       </div>
 
     </section>
-  )
+  );
 }
 
 export default AddReview;

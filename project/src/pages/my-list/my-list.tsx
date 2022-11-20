@@ -126,7 +126,7 @@ function MyList(): JSX.Element {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 export default MyList;

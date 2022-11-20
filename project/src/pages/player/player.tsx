@@ -32,7 +32,7 @@ function Player(): JSX.Element {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Player;

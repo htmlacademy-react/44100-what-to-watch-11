@@ -126,7 +126,7 @@ function Film(): JSX.Element {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 export default Film;
