@@ -1,18 +1,19 @@
 import React from 'react';
-import FilmCard from '../../components/film-card/film-card';
+import FilmsListComponent from '../../components/films-list-component/films-list-component';
+import { HeadFilm, FilmsList } from '../../types/types';
 
-type FilmData = {
-  title: string;
-  genre: string;
-  releaseDate: number;
+type MainScreenProps = {
+  headFilm: HeadFilm;
+  filmsList: FilmsList;
 }
 
-function Main(props: FilmData): JSX.Element {
+function Main({headFilm, filmsList}: MainScreenProps): JSX.Element {
+
   return (
     <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={props.title} />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={headFilm.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -41,14 +42,14 @@ function Main(props: FilmData): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${props.title} poster`} width="218" height="327" />
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${headFilm.title} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.title}</h2>
+              <h2 className="film-card__title">{headFilm.title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.genre}</span>
-                <span className="film-card__year">{props.releaseDate}</span>
+                <span className="film-card__genre">{headFilm.genre}</span>
+                <span className="film-card__year">{headFilm.releaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -109,27 +110,9 @@ function Main(props: FilmData): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
+            <FilmsListComponent filmsList= {filmsList} />
           </div>
+
         </section>
 
         <footer className="page-footer">

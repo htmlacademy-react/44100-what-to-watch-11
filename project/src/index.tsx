@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { headFilm } from './mocks/headFilm';
+import { filmsList } from './mocks/filmsList';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const HeadFilmData = {
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseDate: 2014,
-};
-
 root.render(
   <React.StrictMode>
-    <App {...HeadFilmData} />
+    <App headFilm={headFilm} filmsList={filmsList} />
   </React.StrictMode>,
 );
