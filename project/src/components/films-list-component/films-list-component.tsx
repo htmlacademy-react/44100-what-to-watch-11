@@ -7,7 +7,7 @@ type FilmsListComponentsProps = {
 }
 
 function FilmsListComponent({filmsList} : FilmsListComponentsProps): JSX.Element {
-  const [, setActiveFilmCard] = useState<Film | null>(null);
+  const [activeFilmCard, setActiveFilmCard] = useState<Film | null>(null);
 
   return (
     <div className="catalog__films-list">
@@ -17,6 +17,7 @@ function FilmsListComponent({filmsList} : FilmsListComponentsProps): JSX.Element
           film={film}
           handleMouseEnter={() => setActiveFilmCard(film)}
           handleMouseLeave={() => setActiveFilmCard(null)}
+          inFocus={film.id === activeFilmCard?.id}
         />
       ))}
     </div>
