@@ -3,6 +3,6 @@ import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(duration);
 
-const formatTimeForPlayer = (minutes: number): string => dayjs.duration(minutes, 'minutes').format('H[h] mm[m]');
+export const formatTimeForPlayer = (minutes: number): string => dayjs.duration(minutes, 'minutes').format('H[h] mm[m]');
 
-export default formatTimeForPlayer;
+export const formatStrarringList = (arr: string[]) => arr.join(', \n');

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { FilmsList } from '../../types/types';
-import formatTimeForPlayer from '../../utils';
+import { formatTimeForPlayer } from '../../utils';
 
 type PlayerProps = {
   filmsList: FilmsList;

@@ -87,7 +87,7 @@ export const filmsList: FilmsList = [
       'Dan Fogler'
     ],
     runTime: 134,
-    genre: 'Fantasy',
+    genre: 'Drama',
     released: 2018,
     id: 4,
     isFavorite: false,
@@ -133,7 +133,7 @@ export const filmsList: FilmsList = [
       'Carrie-Anne Moss'
     ],
     runTime: 136,
-    genre: 'Action',
+    genre: 'Drama',
     released: 1999,
     id: 6,
     isFavorite: false,
@@ -179,7 +179,7 @@ export const filmsList: FilmsList = [
       'Mark Ruffalo'
     ],
     runTime: 138,
-    genre: 'Thriller',
+    genre: 'Drama',
     released: 2010,
     id: 8,
     isFavorite: false,

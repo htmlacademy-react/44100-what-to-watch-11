@@ -1,6 +1,7 @@
-import { Review } from '../types/types';
+import { Reviews } from '../types/types';
 
-export const reviewMock: Review[] = [
+
+export const reviews: Reviews = [
   {
     comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director`s funniest and most exquisitely designed movies in years.',
     date: '2022-10-31T20:30:29.573Z',
