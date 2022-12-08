@@ -19,7 +19,7 @@ function App({headFilm, filmsList, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main headFilm={headFilm} filmsList={filmsList} />} />
+        <Route path='/' element={<Main headFilm={headFilm} />} />
         <Route path='login' element={<SignIn />} />
         <Route path='mylist' element={<PrivateRoute authStatus={AuthStatus.Auth}><MyList filmsList={filmsList}/></PrivateRoute>} />
         <Route path='films/:id/'>
