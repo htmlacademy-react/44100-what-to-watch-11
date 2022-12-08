@@ -3,3 +3,5 @@ export enum TabValue {
   Details = 'details',
   Reviews = 'reviews',
 }
+
+export const DEFAULT_GENRE = 'All genres';
