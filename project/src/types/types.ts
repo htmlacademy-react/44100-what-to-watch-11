@@ -23,17 +23,17 @@ export type FilmsList = Film[];
 export type Genres = {
   AllGenres: string;
   Action: string;
-  Adventure: string,
-  Comedie: string,
-  Crime: string,
-  Documentary: string,
-  Drama: string,
-  Fantasy: string,
-  Horror: string,
-  KidsAndFamily: string,
-  Romance: string,
-  SciFi: string,
-  Thriller: string,
+  Adventure: string;
+  Comedie: string;
+  Crime: string;
+  Documentary: string;
+  Drama: string;
+  Fantasy: string;
+  Horror: string;
+  KidsAndFamily: string;
+  Romance: string;
+  SciFi: string;
+  Thriller: string;
 }
 
 export type HeadFilm = {
