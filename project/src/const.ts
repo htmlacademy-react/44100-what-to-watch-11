@@ -4,4 +4,4 @@ export enum TabValue {
   Reviews = 'reviews',
 }
 
-export const DEFAULT_GENRE = 'All genres';
+export const DEFAULT_DISPLAYED_FILMS_COUNTER = 8;

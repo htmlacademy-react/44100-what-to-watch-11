@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changeGenre, getFilteredFilmsList } from '../../store/actions';
+import { changeGenre, getFilteredFilmsList, resetDisplayedFilmsCounter } from '../../store/actions';
 import { Genres } from '../../types/types';
 
 type GenresListProps = {
@@ -24,6 +24,7 @@ function GenresList({ genres, selectedGenre }: GenresListProps): JSX.Element {
             onClick={() => {
               dispatch(changeGenre(genre));
               dispatch(getFilteredFilmsList());
+              dispatch(resetDisplayedFilmsCounter());
             }}
           >
             {genre}

@@ -58,5 +58,6 @@ export type Reviews = Review[];
 export type InitialState = {
   genre: string;
   films: FilmsList;
+  displayedFilmsCount: number;
 }
 

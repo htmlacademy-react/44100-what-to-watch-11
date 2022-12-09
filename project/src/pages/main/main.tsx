@@ -5,6 +5,7 @@ import { genres } from '../../mocks/genres';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import GenresList from '../../components/genres-list/genres-list';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 
 type MainScreenProps = {
   headFilm: HeadFilm;
@@ -14,6 +15,7 @@ function Main({headFilm}: MainScreenProps): JSX.Element {
 
   const selectedGenre = useAppSelector((state) => state.genre);
   const filmsListByGenre = useAppSelector((state) => state.films);
+  const displayedFilmsCount = useAppSelector((state) => state.displayedFilmsCount);
 
   return (
     <React.Fragment>
@@ -84,8 +86,9 @@ function Main({headFilm}: MainScreenProps): JSX.Element {
 
           <GenresList genres={genres} selectedGenre={selectedGenre} />
 
-          <FilmsListComponent filmsList={filmsListByGenre} />
+          <FilmsListComponent filmsList={filmsListByGenre.slice(0, displayedFilmsCount)} />
 
+          {filmsListByGenre.length - displayedFilmsCount > 0 && <ShowMoreButton />}
         </section>
 
         <footer className="page-footer">
