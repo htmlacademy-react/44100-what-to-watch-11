@@ -36,11 +36,7 @@ export type Genres = {
   Thriller: string;
 }
 
-export type HeadFilm = {
-  title: string;
-  genre: string;
-  releaseDate: number;
-}
+export type PromoFilm = Film | null;
 
 export type Review = {
   comment: string;
@@ -59,5 +55,19 @@ export type InitialState = {
   genre: string;
   films: FilmsList;
   displayedFilmsCount: number;
+  authStatus: string;
+  promoFilm: Film | null;
+  error: string | null;
+  isLoading: boolean;
 }
 
+export type AuthData = {
+  login: string;
+  password: string;
+};
+
+export type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};

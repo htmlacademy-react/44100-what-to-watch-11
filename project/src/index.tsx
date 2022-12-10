@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { headFilm } from './mocks/headFilm';
-import { filmsList } from './mocks/filmsList';
-import { reviews } from './mocks/reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { fetchFilmsListAction, fetchPromoFilmAction } from './store/api-actions';
+
+store.dispatch(fetchPromoFilmAction());
+store.dispatch(fetchFilmsListAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,7 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App headFilm={headFilm} filmsList={filmsList} reviews={reviews} />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

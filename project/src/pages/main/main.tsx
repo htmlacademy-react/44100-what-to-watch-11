@@ -1,27 +1,28 @@
 import React from 'react';
-import { HeadFilm } from '../../types/types';
-//import { DEFAULT_GENRE } from '../../const';
-import { genres } from '../../mocks/genres';
+import { PromoFilm } from '../../types/types';
+import { GENRES } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import GenresList from '../../components/genres-list/genres-list';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import Spinner from '../../components/spinner/spinner';
 
 type MainScreenProps = {
-  headFilm: HeadFilm;
+  promoFilm: PromoFilm;
 }
 
-function Main({headFilm}: MainScreenProps): JSX.Element {
+function Main({promoFilm}: MainScreenProps): JSX.Element {
 
   const selectedGenre = useAppSelector((state) => state.genre);
   const filmsListByGenre = useAppSelector((state) => state.films);
   const displayedFilmsCount = useAppSelector((state) => state.displayedFilmsCount);
+  const isLoading = useAppSelector((state) => state.isLoading);
 
   return (
     <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={headFilm.title} />
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -50,14 +51,14 @@ function Main({headFilm}: MainScreenProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${headFilm.title} poster`} width="218" height="327" />
+              <img src={promoFilm?.posterImage} alt={`${promoFilm?.name ?? ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{headFilm.title}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{headFilm.genre}</span>
-                <span className="film-card__year">{headFilm.releaseDate}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -84,9 +85,11 @@ function Main({headFilm}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={genres} selectedGenre={selectedGenre} />
+          <GenresList genres={GENRES} selectedGenre={selectedGenre} />
 
-          <FilmsListComponent filmsList={filmsListByGenre.slice(0, displayedFilmsCount)} />
+          {isLoading
+            ? <Spinner />
+            : <FilmsListComponent filmsList={filmsListByGenre.slice(0, displayedFilmsCount)} />}
 
           {filmsListByGenre.length - displayedFilmsCount > 0 && <ShowMoreButton />}
         </section>
