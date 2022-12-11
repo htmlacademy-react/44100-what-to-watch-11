@@ -2,16 +2,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import Tabs from '../../components/tabs/tabs';
-import { Film, Reviews } from '../../types/types';
-import { filmsList } from '../../mocks/filmsList';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { Film } from '../../types/types';
 
 type FilmProps = {
   film: Film;
-  reviews: Reviews;
 }
 
-function FilmPage({ film, reviews }: FilmProps): JSX.Element {
+function FilmPage({ film }: FilmProps): JSX.Element {
+  // пока отзывы из моков, позже доделаю запрос с сервера по id фильма
+  const reviews = [
+    {
+      id: 1,
+      user: {
+        id: 16,
+        name: 'Mollie'
+      },
+      rating: 3.8,
+      comment: 'Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.',
+      date: '2022-10-04T13:58:46.523Z'
+    },
+    {
+      id: 2,
+      user: {
+        id: 16,
+        name: 'Mollie'
+      },
+      rating: 4.4,
+      comment: 'The editing is a mess, and the transitions of the plot or characters are rather strange. There is no narrative focus and the storytelling is unbalanced. I cannot really understand why such a bad movie received an overwhelming approval from the critics. ',
+      date: '2022-09-28T13:58:46.523Z'
+    },
+    {
+      id: 3,
+      user: {
+        id: 16,
+        name: 'Mollie'
+      },
+      rating: 2.4,
+      comment: 'A movie that will take you to another world full of emotions.',
+      date: '2022-09-27T13:58:46.523Z'
+    }
+  ];
 
+  const filmsList = useAppSelector((store) => store.films);
   const similarFilms = filmsList.filter((item) => item.genre === film.genre && item.id !== film.id);
 
   return (
