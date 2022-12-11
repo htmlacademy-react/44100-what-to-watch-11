@@ -10,7 +10,7 @@ type GenresListProps = {
 }
 
 function GenresList({ genres, selectedGenre }: GenresListProps): JSX.Element {
-  const films = useAppSelector((store) => store.films);
+  const films = useAppSelector((state) => state.films);
   const dispatch = useDispatch();
   return (
     <ul className="catalog__genres-list">
