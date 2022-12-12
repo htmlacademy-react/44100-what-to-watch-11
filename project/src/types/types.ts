@@ -51,15 +51,28 @@ export type Review = {
 
 export type Reviews = Review[];
 
+export type NewReview = {
+  rating: number;
+  comment: string;
+}
+
+export type ReviewFormData = {
+  rating: number;
+  comment: string;
+}
+
 export type InitialState = {
   genre: string;
   films: FilmsList;
   filmsByGenre: FilmsList;
+  film?: Film;
+  reviews: Reviews;
   displayedFilmsCount: number;
   authorizationStatus: string;
   promoFilm: Film | null;
   error: string | null;
   isLoading: boolean;
+  isReviewFormDisabled: boolean;
 }
 
 export type AuthData = {

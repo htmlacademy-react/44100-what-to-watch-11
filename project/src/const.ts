@@ -19,6 +19,7 @@ export const APIRout = {
   Promo: '/promo',
   Login: '/login',
   Logout: '/logout',
+  Reviews: '/comments',
 };
 
 export enum AuthStatus {
@@ -32,6 +33,11 @@ export enum TabValue {
   Details = 'details',
   Reviews = 'reviews',
 }
+
+export const CommentLength = {
+  min: 50,
+  max: 400,
+};
 
 export const DEFAULT_DISPLAYED_FILMS_COUNTER = 8;
 

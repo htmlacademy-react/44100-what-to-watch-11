@@ -1,58 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import Tabs from '../../components/tabs/tabs';
+import UserBlock from '../../components/user-block/user-block';
+import { AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { Film } from '../../types/types';
+import { store } from '../../store';
+import { fetchFilmAction, fetchFilmsByGenreAction, fetchReviewsAction } from '../../store/api-actions';
+import Page404 from '../page-404/page-404';
 
-type FilmProps = {
-  film: Film;
-}
+function FilmPage(): JSX.Element {
 
-function FilmPage({ film }: FilmProps): JSX.Element {
-  // пока отзывы из моков, позже доделаю запрос с сервера по id фильма
-  const reviews = [
-    {
-      id: 1,
-      user: {
-        id: 16,
-        name: 'Mollie'
-      },
-      rating: 3.8,
-      comment: 'Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.',
-      date: '2022-10-04T13:58:46.523Z'
-    },
-    {
-      id: 2,
-      user: {
-        id: 16,
-        name: 'Mollie'
-      },
-      rating: 4.4,
-      comment: 'The editing is a mess, and the transitions of the plot or characters are rather strange. There is no narrative focus and the storytelling is unbalanced. I cannot really understand why such a bad movie received an overwhelming approval from the critics. ',
-      date: '2022-09-28T13:58:46.523Z'
-    },
-    {
-      id: 3,
-      user: {
-        id: 16,
-        name: 'Mollie'
-      },
-      rating: 2.4,
-      comment: 'A movie that will take you to another world full of emotions.',
-      date: '2022-09-27T13:58:46.523Z'
+  const { id } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (id) {
+      store.dispatch(fetchFilmAction(id));
+      store.dispatch(fetchFilmsByGenreAction(id));
+      store.dispatch(fetchReviewsAction(id));
     }
-  ];
+  }, [id]);
 
-  const filmsList = useAppSelector((store) => store.films);
-  const similarFilms = filmsList.filter((item) => item.genre === film.genre && item.id !== film.id);
+  const { film, filmsByGenre, reviews, authorizationStatus } = useAppSelector((storage) => storage);
+
+  if (!film) {
+    return <Page404 />;
+  }
 
   return (
     <React.Fragment>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.backgroundImage} alt={film.name} />
+            <img src={film?.backgroundImage} alt={film?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -66,24 +47,16 @@ function FilmPage({ film }: FilmProps): JSX.Element {
               </Link>
             </div>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
+
           </header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{film?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{film?.genre}</span>
+                <span className="film-card__year">{film?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -100,7 +73,7 @@ function FilmPage({ film }: FilmProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={'review'} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthStatus.Auth && <Link to={'review'} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -109,11 +82,11 @@ function FilmPage({ film }: FilmProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <img src={film?.posterImage} alt={film?.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <Tabs film={film} reviews={reviews} />
+              {film && <Tabs film={film} reviews={reviews} />}
             </div>
           </div>
         </div>
@@ -123,7 +96,7 @@ function FilmPage({ film }: FilmProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsListComponent filmsList={similarFilms} />
+          <FilmsListComponent filmsList={filmsByGenre} />
 
         </section>
 

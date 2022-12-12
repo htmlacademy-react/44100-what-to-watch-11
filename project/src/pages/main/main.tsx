@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GENRES } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
@@ -6,11 +6,24 @@ import GenresList from '../../components/genres-list/genres-list';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
 import UserBlock from '../../components/user-block/user-block';
+import { store } from '../../store';
+import { changeGenre, getFilteredFilmsList, resetDisplayedFilmsCounter } from '../../store/actions';
+import { FilmsList } from '../../types/types';
 
-function Main(): JSX.Element {
+type MainPageProps = {
+  films: FilmsList;
+}
+
+function Main({ films }: MainPageProps): JSX.Element {
+
+  useEffect(() => {
+    store.dispatch(changeGenre(GENRES.AllGenres));
+    store.dispatch(getFilteredFilmsList(films));
+    store.dispatch(resetDisplayedFilmsCounter());
+  }, []);
 
   const selectedGenre = useAppSelector((state) => state.genre);
-  const filmsByGenre = useAppSelector((state) => state.filmsByGenre);
+  const filmsByGenre = useAppSelector((storage) => storage.filmsByGenre);
   const displayedFilmsCount = useAppSelector((state) => state.displayedFilmsCount);
   const isLoading = useAppSelector((state) => state.isLoading);
   const { promoFilm } = useAppSelector((state) => state);

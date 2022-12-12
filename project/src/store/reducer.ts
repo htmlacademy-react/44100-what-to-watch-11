@@ -9,19 +9,22 @@ import {
   increaseDispayedFilmsCounter,
   requireAuthStatus,
   getPromoFilm,
-  getFilmsList
+  getFilmsList,
+  getFilm,
+  getReviews
 } from './actions';
-
 
 const initialState: InitialState = {
   genre: GENRES.AllGenres,
   films: [],
   filmsByGenre: [],
+  reviews: [],
   promoFilm: null,
   displayedFilmsCount: DEFAULT_DISPLAYED_FILMS_COUNTER,
   authorizationStatus: AuthStatus.Unknown,
-  error: null,
   isLoading: true,
+  error: null,
+  isReviewFormDisabled: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -30,6 +33,9 @@ const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
       state.filmsByGenre = state.films;
       state.isLoading = false;
+    })
+    .addCase(getFilm, (state, action) => {
+      state.film = action.payload;
     })
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
@@ -40,6 +46,9 @@ const reducer = createReducer(initialState, (builder) => {
       } else {
         state.filmsByGenre = state.films.filter((film) => film.genre === state.genre);
       }
+    })
+    .addCase(getReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(getPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
