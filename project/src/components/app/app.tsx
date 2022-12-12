@@ -16,11 +16,11 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Main films={films} />} />
         <Route path='login' element={<SignIn />} />
         <Route path='mylist' element={<PrivateRoute authorizationStatus={authorizationStatus}><MyList filmsList={films}/></PrivateRoute>} />
         <Route path='films/:id/'>
-          <Route index element={<Film film={films[0]} />} />
+          <Route index element={<Film />} />
           <Route path='review' element={<AddReview filmsList={films}/>} />
         </Route>
         <Route path='/player/:id' element={<Player filmsList={films}/>} />
