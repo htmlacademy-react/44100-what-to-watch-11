@@ -54,8 +54,9 @@ export type Reviews = Review[];
 export type InitialState = {
   genre: string;
   films: FilmsList;
+  filmsByGenre: FilmsList;
   displayedFilmsCount: number;
-  authStatus: string;
+  authorizationStatus: string;
   promoFilm: Film | null;
   error: string | null;
   isLoading: boolean;

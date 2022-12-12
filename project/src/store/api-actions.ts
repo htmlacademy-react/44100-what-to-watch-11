@@ -5,7 +5,7 @@ import { APIRout, AuthStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AppDispatch, State } from '../types/state';
 import { AuthData, Film, FilmsList, UserData } from '../types/types';
-import { getFilmsList, getFilteredFilmsList, getPromoFilm, requireAuthStatus, setError } from './actions';
+import { getFilmsList, getPromoFilm, requireAuthStatus, setError } from './actions';
 
 export const fetchFilmsListAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -16,18 +16,6 @@ export const fetchFilmsListAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<FilmsList>(APIRout.Films);
     dispatch(getFilmsList(data));
-  }
-);
-
-export const fetchFilteredFilmsListAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'fetchFilteredFilmsList',
-  async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<FilmsList>(APIRout.Films);
-    dispatch(getFilteredFilmsList(data));
   }
 );
 

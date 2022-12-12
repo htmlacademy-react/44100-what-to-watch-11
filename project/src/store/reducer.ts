@@ -12,12 +12,14 @@ import {
   getFilmsList
 } from './actions';
 
+
 const initialState: InitialState = {
   genre: GENRES.AllGenres,
   films: [],
+  filmsByGenre: [],
   promoFilm: null,
   displayedFilmsCount: DEFAULT_DISPLAYED_FILMS_COUNTER,
-  authStatus: AuthStatus.Unknown,
+  authorizationStatus: AuthStatus.Unknown,
   error: null,
   isLoading: true,
 };
@@ -26,16 +28,18 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getFilmsList, (state, action) => {
       state.films = action.payload;
+      state.filmsByGenre = state.films;
       state.isLoading = false;
     })
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(getFilteredFilmsList, (state, action) => {
+    .addCase(getFilteredFilmsList, (state) => {
       if (state.genre === GENRES.AllGenres) {
-        return;
+        state.filmsByGenre = state.films;
+      } else {
+        state.filmsByGenre = state.films.filter((film) => film.genre === state.genre);
       }
-      state.films = action.payload.filter((film) => film.genre === state.genre);
     })
     .addCase(getPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
@@ -47,7 +51,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.displayedFilmsCount += DEFAULT_DISPLAYED_FILMS_COUNTER;
     })
     .addCase(requireAuthStatus, (state, action) => {
-      state.authStatus = action.payload;
+      state.authorizationStatus = action.payload;
     });
 });
 

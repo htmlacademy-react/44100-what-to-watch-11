@@ -12,7 +12,7 @@ function FilmsListComponent({ filmsList }: FilmsListComponentsProps): JSX.Elemen
   return (
     <div className="catalog__films-list">
       <div className="catalog__films-list">
-        {filmsList.map((film) => (
+        {filmsList?.map((film) => (
           <FilmCard
             key={film.id}
             film={film}

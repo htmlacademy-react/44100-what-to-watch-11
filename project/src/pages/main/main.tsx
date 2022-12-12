@@ -1,22 +1,19 @@
 import React from 'react';
-import { PromoFilm } from '../../types/types';
 import { GENRES } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import GenresList from '../../components/genres-list/genres-list';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
+import UserBlock from '../../components/user-block/user-block';
 
-type MainScreenProps = {
-  promoFilm: PromoFilm;
-}
-
-function Main({promoFilm}: MainScreenProps): JSX.Element {
+function Main(): JSX.Element {
 
   const selectedGenre = useAppSelector((state) => state.genre);
-  const filmsListByGenre = useAppSelector((state) => state.films);
+  const filmsByGenre = useAppSelector((state) => state.filmsByGenre);
   const displayedFilmsCount = useAppSelector((state) => state.displayedFilmsCount);
   const isLoading = useAppSelector((state) => state.isLoading);
+  const { promoFilm } = useAppSelector((state) => state);
 
   return (
     <React.Fragment>
@@ -36,16 +33,8 @@ function Main({promoFilm}: MainScreenProps): JSX.Element {
             </a>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
+
         </header>
 
         <div className="film-card__wrap">
@@ -89,9 +78,9 @@ function Main({promoFilm}: MainScreenProps): JSX.Element {
 
           {isLoading
             ? <Spinner />
-            : <FilmsListComponent filmsList={filmsListByGenre.slice(0, displayedFilmsCount)} />}
+            : <FilmsListComponent filmsList={filmsByGenre.slice(0, displayedFilmsCount)} />}
 
-          {filmsListByGenre.length - displayedFilmsCount > 0 && <ShowMoreButton />}
+          {filmsByGenre.length - displayedFilmsCount > 0 && <ShowMoreButton />}
         </section>
 
         <footer className="page-footer">
