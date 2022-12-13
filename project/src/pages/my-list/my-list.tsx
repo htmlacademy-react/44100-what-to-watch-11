@@ -1,23 +1,37 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
+import Spinner from '../../components/spinner/spinner';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getFilmsList } from '../../store/data/data-selector';
-
+import { store } from '../../store';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
+import { getFavoriteFilms, getFavoriteFilmsLoadingStatus } from '../../store/data/data-selector';
 
 function MyList(): JSX.Element {
-  const filmsList = useAppSelector(getFilmsList);
+
+  const films = useAppSelector(getFavoriteFilms);
+  const isFavoriteFilmsDataLoading = useAppSelector(getFavoriteFilmsLoadingStatus);
+
+  useEffect(() => {
+    store.dispatch(fetchFavoriteFilmsAction());
+  }, [store.dispatch]);
+
+  if (isFavoriteFilmsDataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <a href="main.html" className="logo__link">
+          <Link to='/' className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{filmsList.length}</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -33,17 +47,17 @@ function MyList(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsListComponent filmsList={filmsList}/>
+        <FilmsListComponent filmsList={films}/>
 
       </section>
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link to='/' className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <div className="copyright">

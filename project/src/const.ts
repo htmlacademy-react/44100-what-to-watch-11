@@ -20,6 +20,7 @@ export const APIRout = {
   Login: '/login',
   Logout: '/logout',
   Reviews: '/comments',
+  Favorite: '/favorite',
 };
 
 export enum AuthStatus {

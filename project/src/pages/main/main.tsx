@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GENRES } from '../../const';
+import { AuthStatus, GENRES } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import GenresList from '../../components/genres-list/genres-list';
@@ -8,19 +8,24 @@ import Spinner from '../../components/spinner/spinner';
 import UserBlock from '../../components/user-block/user-block';
 import { getFilmsList, getGenre, getLoadingStatus, getPromoFilm } from '../../store/data/data-selector';
 import { getDisplayedFilmsCount } from '../../store/utils/utils-selector';
-import { useDispatch } from 'react-redux';
 import { resetDisplayedFilmsCounter } from '../../store/utils/utils';
 import { getFilmsSelectedByGenre } from '../../utils';
 import { changeGenre } from '../../store/data/data';
+import PlayButton from '../../components/play-button/play-button';
+import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-butone';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { getAuthStatus } from '../../store/user/user-selector';
 
 function Main(): JSX.Element {
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(changeGenre(GENRES.AllGenres));
-    dispatch(resetDisplayedFilmsCounter());
-  }, [dispatch]);
+    store.dispatch(changeGenre(GENRES.AllGenres));
+    store.dispatch(resetDisplayedFilmsCounter());
+    if (authorizationStatus === AuthStatus.Auth) {
+      store.dispatch(fetchFavoriteFilmsAction());
+    }
+  }, [store.dispatch]);
 
   const films = useAppSelector(getFilmsList);
   const selectedGenre = useAppSelector(getGenre);
@@ -28,6 +33,7 @@ function Main(): JSX.Element {
   const displayedFilmsCount = useAppSelector(getDisplayedFilmsCount);
   const isLoading = useAppSelector(getLoadingStatus);
   const promoFilm = useAppSelector(getPromoFilm);
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
   return (
     <React.Fragment>
@@ -65,19 +71,11 @@ function Main(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+
+                <PlayButton filmId={promoFilm.id} />
+
+                <FavoriteButone filmId={promoFilm.id} />
+
               </div>
             </div>
           </div>
