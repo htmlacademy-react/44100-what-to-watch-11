@@ -14,7 +14,7 @@ function MyList(): JSX.Element {
 
   useEffect(() => {
     store.dispatch(fetchFavoriteFilmsAction());
-  }, [store.dispatch]);
+  }, []);
 
   if (isFavoriteFilmsDataLoading) {
     return <Spinner />;

@@ -33,7 +33,7 @@ function Player(): JSX.Element {
     return () => {
       isVideoPlayerMounted = false;
     };
-  }, [store.dispatch, id]);
+  }, [id]);
 
   useEffect(() => {
 
