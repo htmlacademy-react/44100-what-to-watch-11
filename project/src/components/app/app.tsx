@@ -8,22 +8,22 @@ import Player from '../../pages/player/player';
 import Page404 from '../../pages/page-404/page-404';
 import { PrivateRoute } from '../private-route/private-route';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { getAuthStatus } from '../../store/user/user-selector';
 
 function App(): JSX.Element {
-  const { films } = useAppSelector((state) => state);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main films={films} />} />
+        <Route path='/' element={<Main />} />
         <Route path='login' element={<SignIn />} />
-        <Route path='mylist' element={<PrivateRoute authorizationStatus={authorizationStatus}><MyList filmsList={films}/></PrivateRoute>} />
+        <Route path='mylist' element={<PrivateRoute authorizationStatus={authorizationStatus}><MyList /></PrivateRoute>} />
         <Route path='films/:id/'>
           <Route index element={<Film />} />
-          <Route path='review' element={<AddReview filmsList={films}/>} />
+          <Route path='review' element={<AddReview />} />
         </Route>
-        <Route path='/player/:id' element={<Player filmsList={films}/>} />
+        <Route path='/player/:id' element={<Player />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
     </BrowserRouter>

@@ -1,13 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { FilmsList } from '../../types/types';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getFilmsList } from '../../store/data/data-selector';
 import { formatTimeForPlayer } from '../../utils';
 
-type PlayerProps = {
-  filmsList: FilmsList;
-}
-
-function Player({filmsList}: PlayerProps): JSX.Element {
+function Player(): JSX.Element {
   const params = useParams();
+  const filmsList = useAppSelector(getFilmsList);
   const selectedFilm = filmsList.find((film) => film.id === Number(params.id));
 
   return(

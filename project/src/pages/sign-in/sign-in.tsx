@@ -4,12 +4,13 @@ import { AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { store } from '../../store';
 import { loginAction } from '../../store/api-actions';
+import { getAuthStatus } from '../../store/user/user-selector';
 import { AuthData } from '../../types/types';
 
 function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   const navigate = useNavigate();
 
   const pattern = '[A-Za-z]+[0-9]|[0-9]+[A-Za-z]';

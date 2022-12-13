@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router';
 import { APIRout } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { store } from '../../store';
-import { setReviewFormDisabled } from '../../store/actions';
 import { newCommentAction } from '../../store/api-actions';
+import { getFilm } from '../../store/data/data-selector';
+import { setReviewFormDisabled } from '../../store/utils/utils';
+import { getFormStatus } from '../../store/utils/utils-selector';
 import { ReviewFormData } from '../../types/types';
 
 function AddReviewComponent(): JSX.Element {
   const navigate = useNavigate();
 
-  const film = useAppSelector((state) => state.film);
+  const film = useAppSelector(getFilm);
 
   const [formData, setFormData] = useState<ReviewFormData>({
     rating: 1,
@@ -19,7 +21,7 @@ function AddReviewComponent(): JSX.Element {
 
   const [ratingValue, setRatingValue] = useState<number>(0);
 
-  const isReviewFormDisabled = useAppSelector((state) => state.isReviewFormDisabled);
+  const isReviewFormDisabled = useAppSelector(getFormStatus);
 
   const [isReviewFormValid, setReviewFormValid] = useState<boolean>(false);
 

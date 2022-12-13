@@ -62,16 +62,8 @@ export type ReviewFormData = {
 }
 
 export type InitialState = {
-  genre: string;
-  films: FilmsList;
-  filmsByGenre: FilmsList;
-  film?: Film;
-  reviews: Reviews;
   displayedFilmsCount: number;
-  authorizationStatus: string;
-  promoFilm: Film | null;
-  error: string | null;
-  isLoading: boolean;
+
   isReviewFormDisabled: boolean;
 }
 
@@ -85,3 +77,27 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type FilmsData = {
+  films: FilmsList;
+  promoFilm: Film | null;
+  film?: Film;
+  genre: string;
+  filmsByGenre: FilmsList;
+  similarFilms: FilmsList;
+  reviews: Reviews;
+  isLoading: boolean;
+  filmIsLoading: boolean;
+  reviewsIsLoading : boolean;
+  similarFilmsIsLoading: boolean;
+  error: string | null;
+}
+
+export type GlobalUserData = {
+  authorizationStatus: string;
+}
+
+export type UtilsData = {
+  displayedFilmsCount: number;
+  isReviewFormDisabled: boolean;
+}

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { increaseDispayedFilmsCounter } from '../../store/actions';
+import { increaseDispayedFilmsCounter } from '../../store/utils/utils';
 
 function ShowMoreButton(): JSX.Element {
   const dispatch = useDispatch();

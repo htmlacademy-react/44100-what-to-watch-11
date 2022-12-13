@@ -6,27 +6,28 @@ import GenresList from '../../components/genres-list/genres-list';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
 import UserBlock from '../../components/user-block/user-block';
-import { store } from '../../store';
-import { changeGenre, getFilteredFilmsList, resetDisplayedFilmsCounter } from '../../store/actions';
-import { FilmsList } from '../../types/types';
+import { getFilmsList, getGenre, getLoadingStatus, getPromoFilm } from '../../store/data/data-selector';
+import { getDisplayedFilmsCount } from '../../store/utils/utils-selector';
+import { useDispatch } from 'react-redux';
+import { resetDisplayedFilmsCounter } from '../../store/utils/utils';
+import { getFilmsSelectedByGenre } from '../../utils';
+import { changeGenre } from '../../store/data/data';
 
-type MainPageProps = {
-  films: FilmsList;
-}
+function Main(): JSX.Element {
 
-function Main({ films }: MainPageProps): JSX.Element {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    store.dispatch(changeGenre(GENRES.AllGenres));
-    store.dispatch(getFilteredFilmsList(films));
-    store.dispatch(resetDisplayedFilmsCounter());
-  }, []);
+    dispatch(changeGenre(GENRES.AllGenres));
+    dispatch(resetDisplayedFilmsCounter());
+  }, [dispatch]);
 
-  const selectedGenre = useAppSelector((state) => state.genre);
-  const filmsByGenre = useAppSelector((storage) => storage.filmsByGenre);
-  const displayedFilmsCount = useAppSelector((state) => state.displayedFilmsCount);
-  const isLoading = useAppSelector((state) => state.isLoading);
-  const { promoFilm } = useAppSelector((state) => state);
+  const films = useAppSelector(getFilmsList);
+  const selectedGenre = useAppSelector(getGenre);
+  const filmsByGenre = getFilmsSelectedByGenre(films, selectedGenre);
+  const displayedFilmsCount = useAppSelector(getDisplayedFilmsCount);
+  const isLoading = useAppSelector(getLoadingStatus);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   return (
     <React.Fragment>
