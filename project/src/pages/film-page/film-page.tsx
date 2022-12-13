@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
+import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { store } from '../../store';
-import { fetchFilmAction, fetchFilmsByGenreAction, fetchReviewsAction } from '../../store/api-actions';
+import { fetchFilmAction, fetchSimilarFilmsAction, fetchReviewsAction } from '../../store/api-actions';
+import { getFilm, getFilmLoadingStatus, getReviews, getReviewsLoadingStatus, getSimilarFilms, getSimilarFilmsLoadingStatus } from '../../store/data/data-selector';
+import { getAuthStatus } from '../../store/user/user-selector';
 import Page404 from '../page-404/page-404';
 
 function FilmPage(): JSX.Element {
@@ -17,14 +20,26 @@ function FilmPage(): JSX.Element {
     window.scrollTo(0, 0);
     if (id) {
       store.dispatch(fetchFilmAction(id));
-      store.dispatch(fetchFilmsByGenreAction(id));
+      store.dispatch(fetchSimilarFilmsAction(id));
       store.dispatch(fetchReviewsAction(id));
     }
   }, [id]);
 
-  const { film, filmsByGenre, reviews, authorizationStatus } = useAppSelector((storage) => storage);
+  const film = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const reviews = useAppSelector(getReviews);
+  const isFilmLoading = useAppSelector(getFilmLoadingStatus);
+  const isReviewsLoading = useAppSelector(getReviewsLoadingStatus);
+  const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsLoadingStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
-  if (!film) {
+  if (isFilmLoading && isSimilarFilmsLoading && isReviewsLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
+  if (film === undefined) {
     return <Page404 />;
   }
 
@@ -96,7 +111,7 @@ function FilmPage(): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsListComponent filmsList={filmsByGenre} />
+          <FilmsListComponent filmsList={similarFilms} />
 
         </section>
 

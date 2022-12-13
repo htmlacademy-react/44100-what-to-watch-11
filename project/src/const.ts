@@ -34,6 +34,12 @@ export enum TabValue {
   Reviews = 'reviews',
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+  Utils = 'UTILS',
+}
+
 export const CommentLength = {
   min: 50,
   max: 400,

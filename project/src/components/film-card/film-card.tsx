@@ -2,7 +2,7 @@ import { Film } from '../../types/types';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import { store } from '../../store';
-import { changeGenre } from '../../store/actions';
+import { changeGenre } from '../../store/data/data';
 
 type FilmCardProps = {
   film: Film;

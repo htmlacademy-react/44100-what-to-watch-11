@@ -1,11 +1,11 @@
-import { FilmsList } from '../../types/types';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getFilmsList } from '../../store/data/data-selector';
 
-type MyListProps = {
-  filmsList: FilmsList;
-}
 
-function MyList({filmsList}: MyListProps): JSX.Element {
+function MyList(): JSX.Element {
+  const filmsList = useAppSelector(getFilmsList);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

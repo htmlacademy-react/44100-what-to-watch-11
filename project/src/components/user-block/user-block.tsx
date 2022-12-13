@@ -3,9 +3,11 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { AuthStatus } from '../../const';
 import { logoutAction } from '../../store/api-actions';
 import { store } from '../../store';
+import { getAuthStatus } from '../../store/user/user-selector';
+import { memo } from 'react';
 
 function UserBlock(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
   const loggedIn = authorizationStatus === AuthStatus.Auth;
 
   return (
@@ -38,4 +40,4 @@ function UserBlock(): JSX.Element {
   );
 }
 
-export default UserBlock;
+export default memo(UserBlock);
