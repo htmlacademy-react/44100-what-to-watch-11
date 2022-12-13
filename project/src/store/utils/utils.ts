@@ -12,7 +12,7 @@ export const utils = createSlice({
   name: NameSpace.Utils,
   initialState,
   reducers: {
-    setReviewFormDisabled: (state, action) => {
+    setReviewFormDisabled: (state, action: {type: string; payload: boolean}) => {
       state.isReviewFormDisabled = action.payload;
     },
     resetDisplayedFilmsCounter: (state) => {
