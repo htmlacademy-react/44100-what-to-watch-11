@@ -15,7 +15,7 @@ export const fetchFilmsListAction = createAsyncThunk<FilmsList, undefined, {
   'data/fetchFilmsList',
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<FilmsList>(APIRout.Films);
-    return(data);
+    return (data);
   }
 );
 
@@ -75,6 +75,30 @@ export const fetchReviewsAction = createAsyncThunk<Reviews, string, {
       throw new Error('No data');
     }
   });
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<FilmsList, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteFilms',
+  async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<FilmsList>(APIRout.Favorite);
+    return data;
+  },
+);
+
+export const setFavoriteFilmAction = createAsyncThunk<void, [number, boolean], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/setFavoriteFilm',
+  async ([id, status], { dispatch, extra: api }) => {
+    await api.post<Film>(`${APIRout.Favorite}/${id}/${Number(status)}`);
+    dispatch(fetchFavoriteFilmsAction());
+  },
+);
 
 export const newCommentAction = createAsyncThunk<void, [number, NewReview], {
   dispatch: AppDispatch;

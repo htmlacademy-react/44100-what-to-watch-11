@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-butone';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
+import PlayButton from '../../components/play-button/play-button';
 import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
@@ -75,19 +77,11 @@ function FilmPage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+
+                <PlayButton filmId={film.id}/>
+
+                <FavoriteButone filmId={film.id} />
+
                 {authorizationStatus === AuthStatus.Auth && <Link to={'review'} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

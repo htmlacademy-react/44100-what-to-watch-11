@@ -1,19 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GENRES, NameSpace } from '../../const';
-import { FilmsData } from '../../types/types';
-import { fetchSimilarFilmsAction, fetchFilmsListAction, fetchFilmAction, fetchPromoFilmAction, fetchReviewsAction } from '../api-actions';
+import { Film, FilmsData } from '../../types/types';
+import { fetchSimilarFilmsAction, fetchFilmsListAction, fetchFilmAction, fetchPromoFilmAction, fetchReviewsAction, fetchFavoriteFilmsAction } from '../api-actions';
 
 const initialState: FilmsData = {
   films: [],
-  promoFilm: null,
+  promoFilm: {} as Film,
   genre: GENRES.AllGenres,
   filmsByGenre: [],
   similarFilms: [],
   reviews: [],
+  favoriteFilms: [],
   isLoading: false,
   filmIsLoading: false,
   reviewsIsLoading : false,
   similarFilmsIsLoading: false,
+  myListIsLoading: false,
   error: null,
 };
 
@@ -61,6 +63,13 @@ export const data = createSlice({
       .addCase(fetchSimilarFilmsAction.fulfilled, (state, action) => {
         state.similarFilms = action.payload;
         state.similarFilmsIsLoading = false;
+      })
+      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
+        state.myListIsLoading = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
+        state.favoriteFilms = action.payload;
+        state.myListIsLoading = false;
       });
   },
 });

@@ -80,16 +80,18 @@ export type UserData = {
 
 export type FilmsData = {
   films: FilmsList;
-  promoFilm: Film | null;
+  promoFilm: Film;
   film?: Film;
   genre: string;
   filmsByGenre: FilmsList;
   similarFilms: FilmsList;
   reviews: Reviews;
+  favoriteFilms: FilmsList;
   isLoading: boolean;
   filmIsLoading: boolean;
   reviewsIsLoading : boolean;
   similarFilmsIsLoading: boolean;
+  myListIsLoading: boolean;
   error: string | null;
 }
 

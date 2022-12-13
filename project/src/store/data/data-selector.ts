@@ -1,5 +1,6 @@
 import { NameSpace } from '../../const';
 import { State } from '../../types/state';
+import { FilmsList } from '../../types/types';
 
 export const getFilmsList = (state: State) => state[NameSpace.Data].films;
 
@@ -22,5 +23,9 @@ export const getFilmLoadingStatus = (state: State) => state[NameSpace.Data].film
 export const getReviewsLoadingStatus = (state: State) => state[NameSpace.Data].reviewsIsLoading;
 
 export const getSimilarFilmsLoadingStatus = (state: State) => state[NameSpace.Data].similarFilmsIsLoading;
+
+export const getFavoriteFilms = (state: State): FilmsList => state[NameSpace.Data].favoriteFilms;
+
+export const getFavoriteFilmsLoadingStatus = (state: State): boolean => state[NameSpace.Data].myListIsLoading;
 
 export const getError = (state: State) => state[NameSpace.Data].error;
