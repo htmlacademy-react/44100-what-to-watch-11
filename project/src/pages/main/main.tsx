@@ -19,13 +19,15 @@ import { getAuthStatus } from '../../store/user/user-selector';
 
 function Main(): JSX.Element {
 
+  const authorizationStatus = useAppSelector(getAuthStatus);
+
   useEffect(() => {
     store.dispatch(changeGenre(GENRES.AllGenres));
     store.dispatch(resetDisplayedFilmsCounter());
     if (authorizationStatus === AuthStatus.Auth) {
       store.dispatch(fetchFavoriteFilmsAction());
     }
-  }, [store.dispatch]);
+  }, [authorizationStatus]);
 
   const films = useAppSelector(getFilmsList);
   const selectedGenre = useAppSelector(getGenre);
@@ -33,7 +35,7 @@ function Main(): JSX.Element {
   const displayedFilmsCount = useAppSelector(getDisplayedFilmsCount);
   const isLoading = useAppSelector(getLoadingStatus);
   const promoFilm = useAppSelector(getPromoFilm);
-  const authorizationStatus = useAppSelector(getAuthStatus);
+
 
   return (
     <React.Fragment>
