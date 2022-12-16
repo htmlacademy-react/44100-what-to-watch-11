@@ -3,7 +3,7 @@ import { DEFAULT_DISPLAYED_FILMS_COUNTER,NameSpace } from '../../const';
 import { UtilsData } from '../../types/types';
 import { newCommentAction } from '../api-actions';
 
-const initialState: UtilsData = {
+export const initialState: UtilsData = {
   displayedFilmsCount: DEFAULT_DISPLAYED_FILMS_COUNTER,
   isReviewFormDisabled: false,
 };

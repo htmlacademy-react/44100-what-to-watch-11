@@ -48,4 +48,6 @@ export const CommentLength = {
 
 export const DEFAULT_DISPLAYED_FILMS_COUNTER = 8;
 
+export const VIDEOPLAYER_TIMEOUT = 1000;
+
 export const TIMEOUT_SHOW_ERROR = 2000;
