@@ -15,8 +15,8 @@ function AddReviewComponent(): JSX.Element {
   const film = useAppSelector(getFilm);
 
   const [formData, setFormData] = useState<ReviewFormData>({
-    rating: 1,
-    comment: 'a',
+    rating: 0,
+    comment: '',
   });
 
   const [ratingValue, setRatingValue] = useState<number>(0);

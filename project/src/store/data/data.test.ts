@@ -20,7 +20,7 @@ describe('Reducer: data', () => {
 
   beforeEach(() => {
     state = initialState;
-  })
+  });
 
   it('without additional parameters should return initial state', () => {
     expect(data.reducer(undefined, { type: 'UNKNOWN_ACTION' }))

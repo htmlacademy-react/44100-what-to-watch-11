@@ -1,14 +1,14 @@
-import { createAPI } from "../services/api";
+import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { State } from "../types/state";
+import { State } from '../types/state';
 import { Action } from 'redux';
 import thunk from 'redux-thunk';
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { APIRout } from "../const";
-import { checkAuthStatusAction, fetchFilmAction, fetchFilmsListAction, fetchPromoFilmAction, fetchReviewsAction, fetchSimilarFilmsAction, newCommentAction, setFavoriteFilmAction } from "./api-actions";
-import { Film, FilmsList, Review, Reviews } from "../types/types";
-import { makeFakeFilm, makeFakeReview } from "../mocks/mocks";
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { APIRout } from '../const';
+import { checkAuthStatusAction, fetchFilmAction, fetchFilmsListAction, fetchPromoFilmAction, fetchReviewsAction, fetchSimilarFilmsAction, newCommentAction, setFavoriteFilmAction } from './api-actions';
+import { Film, FilmsList, Review, Reviews } from '../types/types';
+import { makeFakeFilm, makeFakeReview } from '../mocks/mocks';
 
 const film: Film = makeFakeFilm();
 const films: FilmsList = Array.from({ length: 3 }, makeFakeFilm);

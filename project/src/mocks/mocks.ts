@@ -1,8 +1,8 @@
-import { random, name, image, lorem, music, date, internet } from "faker";
-import { Film, Review, UserData } from "../types/types";
+import { random, name, image, lorem, music, date, internet } from 'faker';
+import { Film, Review, UserData } from '../types/types';
 
 const getRandomNumber = (max: number): number => Math.floor(Math.random() * max);
-const getRandomColor = () => Math.floor(Math.random()*16777215).toString(16);
+const getRandomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 const getRandomFullName = () => `${name.firstName()} ${name.lastName()}`;
 const getRandomDate = (start: Date, end: Date): number => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).getFullYear();
 

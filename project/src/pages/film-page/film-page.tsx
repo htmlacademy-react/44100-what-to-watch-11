@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-butone';
+import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-buttone';
 import FilmsListComponent from '../../components/films-list-component/films-list-component';
 import PlayButton from '../../components/play-button/play-button';
 import Spinner from '../../components/spinner/spinner';

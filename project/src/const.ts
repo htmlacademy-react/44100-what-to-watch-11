@@ -15,6 +15,7 @@ export const GENRES = {
 };
 
 export const APIRout = {
+  Main: '/',
   Films: '/films',
   Promo: '/promo',
   Login: '/login',

@@ -45,6 +45,7 @@ function VideoPlayer({film, width, height}: VideoPlayerProps): JSX.Element {
       width={width}
       height={height}
       muted
+      data-testid={'video'}
     >
     </video>
   );
