@@ -3,7 +3,7 @@ import { GENRES, NameSpace } from '../../const';
 import { Film, FilmsData } from '../../types/types';
 import { fetchSimilarFilmsAction, fetchFilmsListAction, fetchFilmAction, fetchPromoFilmAction, fetchReviewsAction, fetchFavoriteFilmsAction } from '../api-actions';
 
-const initialState: FilmsData = {
+export const initialState: FilmsData = {
   films: [],
   promoFilm: {} as Film,
   genre: GENRES.AllGenres,

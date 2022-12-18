@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { VIDEOPLAYER_TIMEOUT } from '../../const';
 import { Film } from '../../types/types';
 
 type VideoPlayerProps = {
@@ -29,7 +30,7 @@ function VideoPlayer({film, width, height}: VideoPlayerProps): JSX.Element {
       if (ref.current) {
         ref.current.play();
       }
-    }, 1000);
+    }, VIDEOPLAYER_TIMEOUT);
 
     return () => {
       isMounted = false;
@@ -44,6 +45,7 @@ function VideoPlayer({film, width, height}: VideoPlayerProps): JSX.Element {
       width={width}
       height={height}
       muted
+      data-testid={'video'}
     >
     </video>
   );

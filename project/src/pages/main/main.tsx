@@ -12,7 +12,7 @@ import { resetDisplayedFilmsCounter } from '../../store/utils/utils';
 import { getFilmsSelectedByGenre } from '../../utils';
 import { changeGenre } from '../../store/data/data';
 import PlayButton from '../../components/play-button/play-button';
-import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-butone';
+import FavoriteButone from '../../components/favorite-buttone.tsx/favorite-buttone';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 import { store } from '../../store';
 import { getAuthStatus } from '../../store/user/user-selector';

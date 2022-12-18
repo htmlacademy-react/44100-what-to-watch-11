@@ -5,7 +5,7 @@ type DetailsabProps = {
   film: Film;
 }
 
-function OverviewTab({ film }: DetailsabProps): JSX.Element {
+function DetailsTab({ film }: DetailsabProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -39,4 +39,4 @@ function OverviewTab({ film }: DetailsabProps): JSX.Element {
   );
 }
 
-export default OverviewTab;
+export default DetailsTab;

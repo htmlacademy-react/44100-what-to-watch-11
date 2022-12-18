@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { APIRout } from '../../const';
+import { APIRout, CommentLength } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { store } from '../../store';
 import { newCommentAction } from '../../store/api-actions';
@@ -15,8 +15,8 @@ function AddReviewComponent(): JSX.Element {
   const film = useAppSelector(getFilm);
 
   const [formData, setFormData] = useState<ReviewFormData>({
-    rating: 1,
-    comment: 'a',
+    rating: 0,
+    comment: '',
   });
 
   const [ratingValue, setRatingValue] = useState<number>(0);
@@ -25,7 +25,7 @@ function AddReviewComponent(): JSX.Element {
 
   const [isReviewFormValid, setReviewFormValid] = useState<boolean>(false);
 
-  const checkReviewFormValid = () => formData.rating !== null && formData.comment.length >= 50 && formData.comment.length <= 400;
+  const checkReviewFormValid = () => formData.rating !== null && formData.comment.length >= CommentLength.min && formData.comment.length <= CommentLength.max;
 
   const handleRatingValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRatingValue(Number(evt.target.value));

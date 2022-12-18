@@ -3,7 +3,7 @@ import { AuthStatus, NameSpace } from '../../const';
 import { GlobalUserData } from '../../types/types';
 import { checkAuthStatusAction, loginAction, logoutAction } from '../api-actions';
 
-const initialState: GlobalUserData = {
+export const initialState: GlobalUserData = {
   authorizationStatus: AuthStatus.Unknown,
 };
 

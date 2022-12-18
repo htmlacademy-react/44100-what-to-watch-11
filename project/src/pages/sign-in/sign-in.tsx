@@ -65,6 +65,7 @@ function SignIn(): JSX.Element {
                 placeholder='Email address'
                 name='user-email'
                 id='user-email'
+                data-testid='login'
               />
               <label className='sign-in__label visually-hidden' htmlFor='user-email'>Email address</label>
             </div>
@@ -76,6 +77,7 @@ function SignIn(): JSX.Element {
                 placeholder='Password'
                 name='user-password'
                 id='user-password'
+                data-testid='password'
                 pattern={pattern}
                 title='Валидный пароль должен состоять минимум из одной буквы и цифры и в нём не должно быть пробелов.'
               />
