@@ -1,5 +1,5 @@
-import { random, name, image, lorem, music, date } from "faker";
-import { Film, Review } from "../types/types";
+import { random, name, image, lorem, music, date, internet } from "faker";
+import { Film, Review, UserData } from "../types/types";
 
 const getRandomNumber = (max: number): number => Math.floor(Math.random() * max);
 const getRandomColor = () => Math.floor(Math.random()*16777215).toString(16);
@@ -37,9 +37,8 @@ export const makeFakeReview = (): Review => ({
   }
 });
 
-export const makeFakeUser = (): UserInfo => ({
+export const makeFakeUser = (): UserData => ({
   id: getRandomNumber(1000),
-  avatarUrl: image.imageUrl(),
   email: internet.email(),
   token: random.alpha({count: 10}),
-} as UserInfo);
+} as UserData);
